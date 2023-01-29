@@ -1,0 +1,49 @@
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: rgb(102, 102, 102) !important; 
+}
+button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.css-1n7zltw-MuiButtonBase-root-MuiButton-root {
+    margin: 0 0 2rem;
+    -ms-transform: translateY(-50%);
+    left: 50%;
+    transform: translate(-50%);
+    background: #f0f0f0;
+    color: rgba(91, 89, 89, 0.964);
+    box-shadow: none;
+    border: 1.5px solid rgb(128 128 128 / 65%);
+    text-transform: capitalize;
+    width: 6rem;
+}
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+    height: 0.6em !important;
+}
+.css-ag7rrr-MuiTypography-root {
+    text-align: center !important;
+    width: 156px !important;
+}
+.css-ag7rrr-MuiTypography-root {
+    margin-bottom: 1rem !important;
+}
+.css-17vbkzs-MuiFormControl-root-MuiTextField-root {
+    margin-bottom: 2rem !important;
+}
+.css-binzgt {
+    margin-top: 64px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: absolute;
+    margin: auto;
+    top: 18%;
+    right: 0;
+    /* bottom: 20%; */
+    left: 0;
+    width: 22%;
+}
