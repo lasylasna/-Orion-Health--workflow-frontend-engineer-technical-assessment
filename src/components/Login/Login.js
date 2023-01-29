@@ -76,7 +76,7 @@ const Login = () => {
   const handleChange = (event) => {
     setState({
       ...state,
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value.trim(),  // trim spaces,
     });
     //if input field is not empty
     setError("");
