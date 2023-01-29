@@ -6,7 +6,9 @@ import "./Profile.css";
 
 const ProfileBody = ({ doctorData, token }) => {
   const [patients, setPatients] = useState([]);
-  const [patientDetail, setPatientDetail] = useState(); 
+  const [patientDetail, setPatientDetail] = useState();
+  const [loading, setLoading] = useState(true);
+  const [showLoaderOnClick, setShowLoaderOnClick] = useState(false);
 
   useEffect(() => {
     getPatientsData();
@@ -14,9 +16,9 @@ const ProfileBody = ({ doctorData, token }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-
-  //fetching patients 
+  //fetching patients
   async function getPatientsData() {
+    setLoading(true);
     await fetch("/patients", {
       headers: {
         Authorization: token,
@@ -29,15 +31,15 @@ const ProfileBody = ({ doctorData, token }) => {
           data.patients[i].className = "not-selected";
         }
         setPatients(data.patients);
+        setLoading(false);
       })
       .catch((err) => console.log(err));
   }
 
-
   //fetching patient details
   const patientClicked = async (patient) => {
-    setPatientDetail(""); 
-
+    setPatientDetail("");
+    setShowLoaderOnClick(true);
     //setting up background color for selected patient
     patients.filter((element) => {
       if (element.id === patient.id) {
@@ -59,47 +61,56 @@ const ProfileBody = ({ doctorData, token }) => {
           let tempObj = { name: "", age: "", sex: "" };
           tempObj = {
             name:
-              ((data.title ? (data.title+" ") :"")+
+              (data.title ? data.title + " " : "") +
               (data?.preferredName
-                ? (data?.preferredName + "(" + data.firstName + ")")
+                ? data?.preferredName + "(" + data.firstName + ")"
                 : data.firstName) +
               " " +
               (data?.middleName ? data?.middleName : "") +
               " " +
               data.familyName +
               " " +
-              (data.suffix ? data.suffix : "")),
+              (data.suffix ? data.suffix : ""),
             age: data.age,
             sex: data.sex,
           };
-          
-          setPatientDetail(tempObj); 
+
+          setPatientDetail(tempObj);
+          setShowLoaderOnClick(false);
         }, 1000);
-        
       })
       .catch((err) => console.log(err));
   };
 
   return (
     <div>
-      <div className="patients">
-        {patients.map((patient) => (
-          <li
-            key={patient.id}
-            onClick={() => patientClicked(patient)}
-            className={patient.className}
-          >
-            {patient.name} ({patient.id})
-          </li>
-        ))}
-      </div>
-      <div>
-        {(patientDetail) ? (
-          <PatientDetails patientDetail={patientDetail} />
-        ) : (
-          <Skeleton count={5} />
-        )}
-      </div>
+      {patients.length > 0 ? (
+        <div className="patients">
+          {patients.map((patient) => (
+            <li
+              key={patient.id}
+              onClick={() => patientClicked(patient)}
+              className={patient.className}
+            >
+              {patient.name} ({patient.id})
+            </li>
+          ))}
+        </div>
+      ) : (
+        <Skeleton count={1} />
+      )}
+      {!showLoaderOnClick ? (
+        <div>
+          {patientDetail && (
+            <PatientDetails
+              patientDetail={patientDetail}
+              showLoaderOnClick={showLoaderOnClick}
+            />
+          )}
+        </div>
+      ) : (
+        <Skeleton count={2} />
+      )}
     </div>
   );
 };
